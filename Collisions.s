@@ -12,7 +12,7 @@ temp:		ds 1
 diff:		ds 1    
 psect	Collision_code, class=CODE
     
-u_boundary_check:
+u_boundary_check: ;checks if the x-ccordinate of the ball is inside the upper boundary
     
     movf    ball_x,W,A
     sublw   61
@@ -25,7 +25,7 @@ u_boundary_check:
     bz	    invert_x_vel
     return
 
-l_boundary_check:
+l_boundary_check: ;checks if the x-ccordinate of the ball is inside the lower boundary
 
     
     movf    ball_x,W,A
@@ -59,113 +59,113 @@ invert_y_vel: ;multiplies the balls x_velocity by -1
        
     
 paddle_R_collision_check:
-    movff   no_sections,col_counter,A
-    movff   paddle_R_x, current_x,A
+    movff   no_sections,col_counter,A ;sets a counter with the number of pixels per section in the paddle
+    movff   paddle_R_x, current_x,A ;sets the current x-coordinate being checked in the paddle to the primary paddle pixel
     movf    ball_x,W,A
     addlw   2
-    movwf   ball_x_2,A
+    movwf   ball_x_2,A ;sets the x-coordinate of the secondary ball pixel being checked
 rloop1:
     movf    ball_x,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_3
     movf    ball_x_2,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_3
     movlw   1
-    addwf   current_x,f,A
-    decfsz  col_counter,A
+    addwf   current_x,f,A ;increase current_x by 1 so stepping through the paddle 1 pixel at a time
+    decfsz  col_counter,A ;decrese the counter so only loop as many times as there are pixels in each paddle section
     bra rloop1
 
-    movff   no_sections,col_counter,A
+    movff   no_sections,col_counter,A ;reset the counter 
 rloop2:    
     movf    ball_x,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_2
     movf    ball_x_2,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_2
     movlw   1
-    addwf   current_x,f,A
-    decfsz  col_counter,A
+    addwf   current_x,f,A ;increase current_x by 1 so stepping through the paddle 1 pixel at a time
+    decfsz  col_counter,A  ;decrese the counter so only loop as many times as there are pixels in each paddle section
     bra rloop2
 
-    movff   no_sections,col_counter,A
+    movff   no_sections,col_counter,A ;reset the counter
 rloop3:    
     movf    ball_x,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_1
     movf    ball_x_2,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_1
     movlw   1
-    addwf   current_x,f,A
-    decfsz  col_counter,A
+    addwf   current_x,f,A ;increase current_x by 1 so stepping through the paddle 1 pixel at a time
+    decfsz  col_counter,A ;decrese the counter so only loop as many times as there are pixels in each paddle section
     bra rloop3
     
-    movff   no_sections,col_counter,A
+    movff   no_sections,col_counter,A ;reset the counter
 rloop4:    
     movf    ball_x,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_2
     movf    ball_x_2,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_2
     movlw   1
-    addwf   current_x,f,A
-    decfsz  col_counter,A
+    addwf   current_x,f,A ;increase current_x by 1 so stepping through the paddle 1 pixel at a time
+    decfsz  col_counter,A ;decrese the counter so only loop as many times as there are pixels in each paddle section
     bra rloop4    
     
-    movff   no_sections,col_counter,A
+    movff   no_sections,col_counter,A ;reset the counter
 rloop5:    
     movf    ball_x,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_3
     movf    ball_x_2,W,A
-    subwf   current_x,W,A
+    subwf   current_x,W,A ;if the x-coord of ball matches the current position in paddle being checked this will be zero
     addlw   1
     movwf   temp,A
-    dcfsnz  temp,A
+    dcfsnz  temp,A ;if temp is zero then the code will branch to set the balls velocity
     goto    vel_set_3
     movlw   1
-    addwf   current_x,f,A
-    decfsz  col_counter,A
+    addwf   current_x,f,A ;increase current_x by 1 so stepping through the paddle 1 pixel at a time
+    decfsz  col_counter,A ;decrese the counter so only loop as many times as there are pixels in each paddle section
     bra rloop5 
     
     movlw   1
-    addwf   L_score,f,A
+    addwf   L_score,f,A ;if the code has not branched off it means no collision has taken place so the score is increased
     
-    call ball_reset_r
+    call ball_reset_r 
     return
     
     
-paddle_L_collision_check:
+paddle_L_collision_check: ;repeats exactly same procdure but for the LHS paddle instead of the RHS paddle
     movff   no_sections,col_counter,A
     movff  paddle_L_x, current_x,A
     movf    ball_x,W,A
@@ -179,7 +179,7 @@ loop1:
     subwf   current_x,W,A
     bz	    vel_set_3
     movlw   1
-    addwf   current_x,f,A
+    addwf   current_x,f,A 
     decfsz  col_counter,A
     bra loop1
 
@@ -242,11 +242,11 @@ loop5:
     return
     
 vel_set_3:
-    call invert_y_vel
+    call invert_y_vel ;need to invert ball's y-vel
     movf    ball_v_x,W,A
-    addlw   4
-    bc	negative_3
-    bra	positive_3
+    addlw   4 ;if the velocity was negative then this will cause a change of sign thus a carry
+    bc	negative_3 ;branches on carry
+    bra	positive_3 ;if there was no carry then the velocity must have been positive
     
 negative_3:
     movlw   -3
@@ -260,9 +260,9 @@ positive_3:
 vel_set_2:
     call invert_y_vel
     movf    ball_v_x,W,A
-    addlw   4
-    bc	negative_2
-    bra	positive_2
+    addlw   4  ;if the velocity was negative then this will cause a change of sign thus a carry
+    bc	negative_2  ;branches on carry
+    bra	positive_2  ;if there was no carry then the velocity must have been positive
     
 negative_2:
     movlw   -2
@@ -276,9 +276,9 @@ positive_2:
 vel_set_1:
     call invert_y_vel
     movf    ball_v_x,W,A
-    addlw   4
-    bc	negative_1
-    bra	positive_1
+    addlw   4  ;if the velocity was negative then this will cause a change of sign thus a carry
+    bc	negative_1  ;branches on carry
+    bra	positive_1  ;if there was no carry then the velocity must have been positive
     
 negative_1:
     movlw   -1
@@ -290,7 +290,7 @@ positive_1:
     return    
 
 
-ball_y_check: ;takes a value from W and checks if ball is there or not
+ball_y_check: ;takes a value from W and checks if ball is inside the goal area
     nop
     movf    ball_y,W,A
     sublw   4
@@ -321,9 +321,12 @@ very_long_delay:
     movlw 0xFF
     call LCD_delay_ms
     return
+    
+    
+    
 ball_reset_l:
     movlw   30
-    movwf   ball_y,A
+    movwf   ball_y,A  ;dictates the balls y-coodinate upon reset if RHS player scored
     call    invert_y_vel
     call    ball_initial_calc
     call    paddle_L_draw
@@ -334,7 +337,7 @@ ball_reset_l:
     
 ball_reset_r:
     movlw   98
-    movwf   ball_y,A
+    movwf   ball_y,A  ;dictates the balls y-coodinate upon reset if RHS player scored
     call    invert_y_vel
     call    ball_initial_calc
     call    paddle_L_draw
