@@ -96,57 +96,57 @@ GLCD_Enable:	    ; pulse enable bit RB4 for 750ns
 	
 Send_Byte_GLCD_I_LHS: ;transmit 1 byte of data from W to GLCD
     movwf   GLCD_Data, A
-    movlw   00100010B
-    movwf   PORTB, A
-    movff   GLCD_Data, PORTD, A
-    nop
+    movlw   00100010B  ;sets GLCD to instruction on LHS
+    movwf   PORTB, A 
+    movff   GLCD_Data, PORTD, A ;puts data want to send into PORTD to be read
+    nop ;need a delay between inputing data and toggling enable bit
     nop
     nop
     nop
     call    GLCD_Enable
-    movlw   10	    ; delay 40us
+    movlw   10	    
     call    LCD_delay_x4us
     return
     
 Send_Byte_GLCD_I_RHS: ;transmit 1 byte of data from W to GLCD
     movwf   GLCD_Data, A
-    movlw   00100001B
+    movlw   00100001B ;sets GLCD to instruction on RHS
     movwf   PORTB, A
-    movff   GLCD_Data, PORTD, A
-    nop
+    movff   GLCD_Data, PORTD, A ;puts data want to send into PORTD to be read
+    nop ;need a delay between inputing data and toggling enable bit
     nop
     nop
     nop
     call    GLCD_Enable
-    movlw   10	    ; delay 40us
+    movlw   10	   
     call    LCD_delay_x4us
     return
     
 Send_Byte_GLCD_D_LHS: ;transmit 1 byte of data from W to GLCD
     movwf   GLCD_Data, A
-    movlw   00100110B
+    movlw   00100110B ;sets GCLD to recieve data to be stored in memeory on LHS
     movwf   PORTB, A
     movff   GLCD_Data, PORTD, A
-    nop
+    nop ;need a delay between inputing data and toggling enable bit
     nop
     nop
     nop
     call    GLCD_Enable
-    movlw   10	    ; delay 40us
+    movlw   10	    
     call    LCD_delay_x4us
     return
     
 Send_Byte_GLCD_D_RHS: ;transmit 1 byte of data from W to GLCD
     movwf   GLCD_Data, A
-    movlw   00100101B
+    movlw   00100101B ;sets GCLD to recieve data to be stored in memeory on RHS
     movwf   PORTB, A
     movff   GLCD_Data, PORTD, A
-    nop
+    nop ;need a delay between inputing data and toggling enable bit
     nop
     nop
     nop
     call    GLCD_Enable
-    movlw   10	    ; delay 40us
+    movlw   10	    
     call    LCD_delay_x4us
     return
     
@@ -158,7 +158,7 @@ Send_Byte_GLCD_D_RHS: ;transmit 1 byte of data from W to GLCD
     call    LCD_delay_x4us
     return
     
-Reset_GLCD: ;transmit 1 byte of data from W to GLCD
+Reset_GLCD: ;resets all instructions previously sent to the GLCD
     movwf   GLCD_Data, A
     movlw   00000010B
     movwf   PORTB, A
@@ -178,13 +178,13 @@ Reset_GLCD: ;transmit 1 byte of data from W to GLCD
     call    GLCD_Enable
     return
     
-Clear_Screen:
+Clear_Screen: ;sends 0xFF to every memory location on the GLCD
     movlw   8
-    movwf   counter_x, A
+    movwf   counter_x, A ;there are 8 different x-addresses that need to be reset
 loop_LHS:   
     movlw   64
-    movwf   counter, A
-    movlw   10111000B
+    movwf   counter, A ;there are 64 y-adresses per side which need to be reset
+    movlw   10111000B ;sets the x-adress to 0
     addwf   counter_x, W, A
     movwf   x_coord, A
     movlw   01000000B ;setting y adress to 0
@@ -242,7 +242,7 @@ Transmit_Single_RHS: ;transmits a single value from W as many imes as is stored 
     return
 
 Scores:
-Score_1_LHS:
+Score_1_LHS: ;displays the number 1 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -257,7 +257,7 @@ Score_1_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
     
-Score_2_LHS:
+Score_2_LHS: ;displays the number 2 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -272,7 +272,7 @@ Score_2_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
 
-Score_3_LHS:
+Score_3_LHS: ;displays the number 3 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -287,7 +287,7 @@ Score_3_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
     
-Score_4_LHS:
+Score_4_LHS: ;displays the number 4 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -302,7 +302,7 @@ Score_4_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
     
-Score_5_LHS:
+Score_5_LHS: ;displays the number 5 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -317,7 +317,7 @@ Score_5_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
     
-Score_6_LHS:
+Score_6_LHS: ;displays the number 6 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -332,7 +332,7 @@ Score_6_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
     
-Score_7_LHS:
+Score_7_LHS: ;displays the number 7 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -347,7 +347,7 @@ Score_7_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
     
-Score_8_LHS:
+Score_8_LHS: ;displays the number 8 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -362,7 +362,7 @@ Score_8_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
     
-Score_9_LHS:
+Score_9_LHS: ;displays the number 9 on LHS of screen
     movlw   01101101B ;setting y adress to 45
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
@@ -377,8 +377,8 @@ Score_9_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
     
-Score_0_LHS:
-    movlw   01101101B ;setting y adress to 45
+Score_0_LHS: ;displays the number 0 on LHS of screen
+    movlw   01101101B ;setting y adress to 15
     call    Send_Byte_GLCD_I_LHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_LHS 
@@ -392,8 +392,8 @@ Score_0_LHS:
     call    Send_Byte_GLCD_D_LHS
     return
  
-Score_1_RHS:
-    movlw   01001111B ;setting y adress to 45
+Score_1_RHS: ;displays the number 1 on RHS of screen
+    movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_RHS 
@@ -407,8 +407,8 @@ Score_1_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
     
-Score_2_RHS:
-    movlw   01001111B ;setting y adress to 45
+Score_2_RHS: ;displays the number 2 on RHS of screen
+    movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_RHS 
@@ -422,8 +422,8 @@ Score_2_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
 
-Score_3_RHS:
-    movlw   01001111B ;setting y adress to 45
+Score_3_RHS: ;displays the number 3 on RHS of screen
+    movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_RHS 
@@ -437,8 +437,8 @@ Score_3_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
     
-Score_4_RHS:
-    movlw   01001111B ;setting y adress to 45
+Score_4_RHS: ;displays the number 4 on RHS of screen
+    movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_RHS 
@@ -452,8 +452,8 @@ Score_4_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
     
-Score_5_RHS:
-    movlw   01001111B ;setting y adress to 45
+Score_5_RHS: ;displays the number 5 on RHS of screen
+    movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_RHS 
@@ -467,8 +467,8 @@ Score_5_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
     
-Score_6_RHS:
-    movlw   01001111B ;setting y adress to 45
+Score_6_RHS: ;displays the number 6 on RHS of screen
+    movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_RHS 
@@ -482,8 +482,8 @@ Score_6_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
     
-Score_7_RHS:
-    movlw   01001111B ;setting y adress to 45
+Score_7_RHS: ;displays the number 7 on RHS of screen
+    movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_RHS 
@@ -497,8 +497,8 @@ Score_7_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
     
-Score_8_RHS:
-    movlw   01001111B ;setting y adress to 45
+Score_8_RHS: ;displays the number 8 on RHS of screen
+    movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
     call    Send_Byte_GLCD_I_RHS 
@@ -512,7 +512,7 @@ Score_8_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
     
-Score_9_RHS:
+Score_9_RHS: ;displays the number 9 on RHS of screen
     movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
@@ -527,7 +527,7 @@ Score_9_RHS:
     call    Send_Byte_GLCD_D_RHS
     return
     
-Score_0_RHS:
+Score_0_RHS: ;displays the number 0 on RHS of screen
     movlw   01001111B ;setting y adress to 15
     call    Send_Byte_GLCD_I_RHS  
     movlw   10111000B ;setting x adress to zero
