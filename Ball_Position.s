@@ -234,9 +234,9 @@ output_ball_graphics:
 
     
     movlw   10111001B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 1 
     movlw   10111001B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 1 
     movf    ball_y, W, A
     movff   page_B1, ball_data, A
     call    ball_graphics ;sets y coord 
@@ -250,9 +250,9 @@ output_ball_graphics:
     call    ball_graphics ;sets y coord
 
     movlw   10111010B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 2 
     movlw   10111010B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 2
     movf    ball_y, W, A
     movff   page_B2, ball_data, A
     call    ball_graphics ;sets y coord 
@@ -266,9 +266,9 @@ output_ball_graphics:
     call    ball_graphics ;sets y coord0 
     
     movlw   10111011B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 3 
     movlw   10111011B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 3 
     movf    ball_y, W, A
     movff   page_B3a, ball_data, A
     call    ball_graphics ;sets y coord 
@@ -282,9 +282,9 @@ output_ball_graphics:
     call    ball_graphics ;sets y coord
     
     movlw   10111100B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 4 
     movlw   10111100B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 4
     movf    ball_y, W, A
     movff   page_B4, ball_data, A
     call    ball_graphics ;sets y coord 
@@ -298,9 +298,9 @@ output_ball_graphics:
     call    ball_graphics ;sets y coord 
     
     movlw   10111101B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 5 
     movlw   10111101B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 5 
     movf    ball_y, W, A
     movff   page_B5, ball_data, A
     call    ball_graphics ;sets y coord 
@@ -314,9 +314,9 @@ output_ball_graphics:
     call    ball_graphics ;sets y coord
 
     movlw   10111110B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 6 
     movlw   10111110B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 6 
     movf    ball_y, W, A
     movff   page_B6, ball_data, A
     call    ball_graphics ;sets y coord 
@@ -330,9 +330,9 @@ output_ball_graphics:
     call    ball_graphics ;sets y coord 
     
     movlw   10111111B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 7 
     movlw   10111111B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 7
     movf    ball_y, W, A
     movff   page_B7, ball_data, A
     call    ball_graphics ;sets y coord 
@@ -410,9 +410,9 @@ clear_ball_graphics:
 
     
     movlw   10111001B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 1 
     movlw   10111001B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 1
     movf    ball_y, W, A
     call    ball_graphics_clear ;sets y coord 
     movf    ball_y, W, A
@@ -423,9 +423,9 @@ clear_ball_graphics:
     call    ball_graphics_clear ;sets y coord
 
     movlw   10111010B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 2
     movlw   10111010B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 2
     movf    ball_y, W, A
     call    ball_graphics_clear ;sets y coord 
     movf    ball_y, W, A
@@ -436,9 +436,9 @@ clear_ball_graphics:
     call    ball_graphics_clear ;sets y coord0 
     
     movlw   10111011B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 3 
     movlw   10111011B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 3
     movf    ball_y, W, A
     call    ball_graphics_clear ;sets y coord 
     movf    ball_y, W, A
@@ -449,9 +449,9 @@ clear_ball_graphics:
     call    ball_graphics_clear ;sets y coord
     
     movlw   10111100B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 4 
     movlw   10111100B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 4
     movf    ball_y, W, A
     call    ball_graphics_clear ;sets y coord 
     movf    ball_y, W, A
@@ -462,9 +462,9 @@ clear_ball_graphics:
     call    ball_graphics_clear ;sets y coord 
     
     movlw   10111101B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 5 
     movlw   10111101B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 5 
     movf    ball_y, W, A
     call    ball_graphics_clear ;sets y coord 
     movf    ball_y, W, A
@@ -475,9 +475,9 @@ clear_ball_graphics:
     call    ball_graphics_clear ;sets y coord
 
     movlw   10111110B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 6 
     movlw   10111110B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 6 
     movf    ball_y, W, A
     call    ball_graphics_clear ;sets y coord 
     movf    ball_y, W, A
@@ -488,9 +488,9 @@ clear_ball_graphics:
     call    ball_graphics_clear ;sets y coord 
     
     movlw   10111111B
-    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 0 
+    call    Send_Byte_GLCD_I_RHS;sets  x coordinate to 7 
     movlw   10111111B
-    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 0
+    call    Send_Byte_GLCD_I_LHS;sets  x coordinate to 7
     movf    ball_y, W, A
     call    ball_graphics_clear ;sets y coord 
     movf    ball_y, W, A
